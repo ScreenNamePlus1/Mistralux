@@ -100,7 +100,7 @@ To run the AI-enhanced Linux command-line shell (`aishell.py`) provided in the p
    - Open a terminal and change to the directory containing `aishell.py`.
    - Example:
      ```bash
-     cd ~/projects/aishell
+     cd ~/projects/Mistralux
      ```
 
 3. **Run the Script**:
