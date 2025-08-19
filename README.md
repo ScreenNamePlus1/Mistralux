@@ -125,7 +125,7 @@ Run `aishell.py` or `aishell_local.py` in Debian on Termux.
    proot-distro login debian
    apt update
    ```
-2. **Set Up Venv** (Optional): Follow the "Virtual Environment Setup" above.
+2. **Set Up Venv** (Not Optional): Follow the "Virtual Environment Setup" above.
 3. **Clone Repository**:
    ```bash
    apt install git
@@ -151,3 +151,27 @@ Run `aishell.py` or `aishell_local.py` in Debian on Termux.
 - **Torch**: Use CPU wheel or Python 3.10 if needed.
 - **Memory**: Increase swap to 4G if out of memory.
 - **Debian**: Reinstall with `proot-distro remove debian` and `proot-distro install debian`.
+
+### To make your Mistral API key persistent in Termux, you can add it to your shell configuration file so it’s available every time you open a new session. Here’s how:
+
+1. Open or edit your shell profile file (e.g., `~/.bashrc` or `~/.profile`) in Debian on Termux:
+   ```bash
+   nano ~/.bashrc
+   ```
+   - If `~/.bashrc` doesn’t exist or you prefer another file, use `nano ~/.profile`.
+
+2. Add the following line at the end of the file, replacing `your_api_key_here` with your actual Mistral API key:
+   ```bash
+   export MISTRAL_API_KEY=your_api_key_here
+   ```
+
+3. Save the file and exit:
+   - Press `Ctrl + O`, then `Enter` to save, and `Ctrl + X` to exit in nano.
+
+4. Apply the changes to your current session:
+   ```bash
+   source ~/.bashrc
+   ```
+   - Or, if you used `~/.profile`, run `source ~/.profile`.
+
+Now, the API key will be available in future Termux sessions without needing to export it manually each time. To verify, you can run `echo $MISTRAL_API_KEY` and check if it displays the key.
