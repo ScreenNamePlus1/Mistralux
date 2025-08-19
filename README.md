@@ -1,3 +1,20 @@
+# This script creates a special command-line environment that combines a regular terminal with an AI assistant. Once you run it, you'll see a $ prompt, which is where you type commands.
+
+​To run a regular command, you just type it as you normally would, like ls -l to list files or cd .. to go up a directory. The script handles the execution for you.
+To use the AI features, you type a specific keyword first.
+
+* natural: ​Use natural to have the AI turn a regular sentence into a Linux command. For example, natural find all text files.
+
+* ​explain: Use explain to get a simple description of a command. For instance, explain du -sh.
+
+​* generate_script: Use generate_script to have the AI write a script for you based on a description, like generate_script a script to monitor disk space.
+
+​* help: To get help with the available commands in your special shell, just type help.
+
+​* exit: To leave the shell, type exit.
+
+### ​Essentially, the script is a bridge that lets you use standard terminal commands and AI-powered tools from a single place.
+
 ### Project Structure
 This is a single-file implementation for simplicity. Save the code above as `aishell.py`. If you want to expand it into a multi-file project, you could structure it like this:
 
