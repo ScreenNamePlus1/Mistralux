@@ -32,6 +32,7 @@ This script integrates standard terminal commands with AI-powered features in on
 2. **Dependencies**: Install `requests`:
    ```bash
    pip3 install requests
+   pip install termcolor
    ```
 3. **Mistral API Key**: Sign up at https://mistral.ai, get a key from https://console.mistral.ai/api-keys/, and set it:
    ```bash
