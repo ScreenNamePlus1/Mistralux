@@ -18,8 +18,14 @@ from functools import lru_cache
 from termcolor import colored
 
 class AIShell(Cmd):
+<<<<<<< HEAD
     intro = colored("Welcome to AI Shell with Mistral AI integration. Type help or ? for assistance.\n", "green")
     prompt = "$ "
+=======
+    intro = "Welcome to AI Shell with Mistral AI integration. Type help or ? for assistance.\n"
+    prompt = "S̵̙͕̀̃c͕͗ͤ̕̕r̴̨̦͕̝ẹ̿͋̒̕ẹ̿͋̒̕ṇ̤͛̒̍N̺̻̔̆ͅā̤̓̍͘ḿ̬̏ͤͅẹ̿͋̒̕P̧͕̒̊͘l̙͖̑̾ͣư̡͕̭̇s̠҉͍͊ͅ1̨̹̦͍̀
+ "
+>>>>>>> c58351cc63ddaebfe02314e1fbe4bf488e3c0b37
     mistral_api_key = os.getenv("MISTRAL_API_KEY")
     if not mistral_api_key:
         print(colored("Error: MISTRAL_API_KEY environment variable not set.", "red"))
