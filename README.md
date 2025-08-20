@@ -55,7 +55,7 @@ This script integrates standard terminal commands with AI-powered features in on
    - Failed commands suggest fixes.
 - **Note**: Uses Mistral’s API (check https://docs.mistral.ai). For local use, see `aishell_local.py`.
 
-#Optional: Make Executable
+# Optional: Make Executable
 - Add shebang: `#!/usr/bin/env python3` at the top.
 - Run: `chmod +x ~/Mistralux/aishell.py` and `./aishell.py` to verify it is executable.
 
