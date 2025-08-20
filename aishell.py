@@ -18,14 +18,8 @@ from functools import lru_cache
 from termcolor import colored
 
 class AIShell(Cmd):
-<<<<<<< HEAD
     intro = colored("Welcome to AI Shell with Mistral AI integration. Type help or ? for assistance.\n", "green")
-    prompt = "$ "
-=======
-    intro = "Welcome to AI Shell with Mistral AI integration. Type help or ? for assistance.\n"
-    prompt = "S̵̙͕̀̃c͕͗ͤ̕̕r̴̨̦͕̝ẹ̿͋̒̕ẹ̿͋̒̕ṇ̤͛̒̍N̺̻̔̆ͅā̤̓̍͘ḿ̬̏ͤͅẹ̿͋̒̕P̧͕̒̊͘l̙͖̑̾ͣư̡͕̭̇s̠҉͍͊ͅ1̨̹̦͍̀
- "
->>>>>>> c58351cc63ddaebfe02314e1fbe4bf488e3c0b37
+    prompt = "S̵̙͕̀̃c͕͗ͤ̕̕r̴̨̦͕̝ẹ̿͋̒̕ẹ̿͋̒̕ṇ̤͛̒̍N̺̻̔̆ͅā̤̓̍͘ḿ̬̏ͤͅẹ̿͋̒̕P̧͕̒̊͘l̙͖̑̾ͣư̡͕̭̇s̠҉͍͊ͅ1̨̹̦͍̀ "
     mistral_api_key = os.getenv("MISTRAL_API_KEY")
     if not mistral_api_key:
         print(colored("Error: MISTRAL_API_KEY environment variable not set.", "red"))
@@ -173,11 +167,11 @@ class AIShell(Cmd):
         if not line:
             print(colored("Usage: summarize <filename>", "red"))
             return
-        
+
         try:
             with open(line, "r") as f:
                 text = f.read()
-            
+
             prompt = f"Summarize the following text in a concise paragraph:\n\n{text}"
             summary = self.query_mistral(prompt, model="mistral-large-latest")
 
@@ -222,5 +216,5 @@ if __name__ == "__main__":
         # Define a dummy colored function if not installed
         def colored(text, *args, **kwargs):
             return text
-            
+
     AIShell().cmdloop()
