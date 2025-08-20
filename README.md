@@ -1,4 +1,5 @@
-!https://github.com/ScreenNamePlus1/Mistralux/blob/main/1755716278933.jpg
+![](https://raw.githubusercontent.com/ScreenNamePlus1/Mistralux/main/1755716278933.jpg)
+
 
 ### This script creates a special command-line environment that combines a regular terminal with an AI assistant. After running it, you’ll see a `$` prompt for typing commands.
 
