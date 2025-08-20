@@ -197,3 +197,40 @@ Run `aishell.py` or `aishell_local.py` in Debian on Termux.
    - Or, if you used `~/.profile`, run `source ~/.profile`.
 
 Now, the API key will be available in future Termux sessions without needing to export it manually each time. To verify, you can run `echo $MISTRAL_API_KEY` and check if it displays the key.
+
+## You might say "This is so annoying opening so many things every time I open Termux...
+
+Yes, you can configure Termux to automatically activate a virtual environment (venv) every time you open it. This is done by adding the activation command to your shell's startup file.
+For most Termux users, the default shell is Bash. The startup file for Bash is ~/.bashrc. If you are using a different shell like Zsh, the file would be ~/.zshrc.
+Here is a step-by-step guide:
+
+### Step 1: 
+Create or Locate your venv
+First, you need a virtual environment. If you don't have one, navigate to the directory where you want it and create it with this command:
+    python -m venv my_env
+
+(You can replace my_env with whatever name you want for your environment.)
+This will create a new directory called my_env with the virtual environment inside.
+
+### Step 2: 
+Edit your Shell's Startup File
+You will now add a line to the ~/.bashrc file (or ~/.zshrc).
+ * Open the file with a text editor. You can use a simple one like nano:
+   nano ~/.bashrc
+
+(or nano ~/.zshrc if you are using Zsh)
+
+ * Move to the very end of the file.
+ * Add the following two lines. The first line is a comment to remind you what this code does. The second line is the command that activates the virtual environment.
+
+    # Automatically activate my_env when Termux starts
+source ~/path/to/my_env/bin/activate
+
+### Important: 
+You must replace ~/path/to/my_env with the actual path to your virtual environment. If your my_env is in your home directory, the path would be ~/my_env.
+ * Press Ctrl + S to save the file and Ctrl + X to exit nano.
+
+### Step 3: 
+Test It
+Close Termux and reopen it. The virtual environment should activate automatically. You will know it's working if you see the name of your virtual environment (e.g., (my_env)) at the beginning of your command prompt.
+
