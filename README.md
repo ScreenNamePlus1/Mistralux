@@ -226,8 +226,8 @@ You will now add a line to the ~/.bashrc file (or ~/.zshrc).
  * Move to the very end of the file.
  * Add the following two lines. The first line is a comment to remind you what this code does. The second line is the command that activates the virtual environment.
 
-    # Automatically activate my_env when Termux starts
-source ~/path/to/my_env/bin/activate
+# Automatically activate my_env when Termux starts
+    source ~/path/to/my_env/bin/activate
 
 ### Important: 
 You must replace ~/path/to/my_env with the actual path to your virtual environment. If your my_env is in your home directory, the path would be ~/my_env.
@@ -237,10 +237,15 @@ You must replace ~/path/to/my_env with the actual path to your virtual environme
 Test It
 Close Termux and reopen it. The virtual environment should activate automatically. You will know it's working if you see the name of your virtual environment (e.g., (my_env)) at the beginning of your command prompt.
 
-### To set your api key automatically when you open Termux
+To set your api key automatically when you open Termux
 
 Open ~/.zshrc and add 
 
     export MISTRAL_API_KEY="<your><api><key>"
 
 to the top somewhere. If you activate your venv using this method, add it below that.
+
+### If you did not already, 
+add
+    export PATH="$HOME/bin:$PATH"
+to the end of your ~/.zshrc file
