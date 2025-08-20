@@ -19,7 +19,7 @@ from termcolor import colored
 
 class AIShell(Cmd):
     intro = colored("Welcome to AI Shell with Mistral AI integration. Type help or ? for assistance.\n", "green")
-    prompt = "S̵̙͕̀̃c͕͗ͤ̕̕r̴̨̦͕̝ẹ̿͋̒̕ẹ̿͋̒̕ṇ̤͛̒̍N̺̻̔̆ͅā̤̓̍͘ḿ̬̏ͤͅẹ̿͋̒̕P̧͕̒̊͘l̙͖̑̾ͣư̡͕̭̇s̠҉͍͊ͅ1̨̹̦͍̀ "
+    prompt = "$ "
     mistral_api_key = os.getenv("MISTRAL_API_KEY")
     if not mistral_api_key:
         print(colored("Error: MISTRAL_API_KEY environment variable not set.", "red"))
