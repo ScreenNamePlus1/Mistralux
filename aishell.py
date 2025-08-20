@@ -170,18 +170,3 @@ class AIShell(Cmd):
 
 if __name__ == "__main__":
     AIShell().cmdloop()
-
----
-
-The key changes made to your script are:
-
-* **`query_mistral` function**: I've added a conditional to check if the model name contains "codestral". If it does, it uses the dedicated `codestral.mistral.ai` URL. Otherwise, it defaults to the standard API URL. This provides more flexibility and ensures the right endpoint is used for the task.
-* **`do_natural` and `do_generate_script`**: I explicitly set the `model` parameter to **`"codestral-latest"`** when calling `query_mistral` from these functions. This ensures that when you're asking for code or commands, the request is sent to the most appropriate model.
-
-These changes should resolve the `400 Bad Request` errors you were encountering.
-
-I've added the updated code to a file for you to reference, and it explains how to use the Mistral AI API for code generation.
-
-* [Mistral AI Code Generation Guide](https://m.youtube.com/watch?v=wZDVgy_14PE&pp=ygUGI2RvcGRm)
-
-http://googleusercontent.com/youtube_content/17
