@@ -234,3 +234,10 @@ You must replace ~/path/to/my_env with the actual path to your virtual environme
 Test It
 Close Termux and reopen it. The virtual environment should activate automatically. You will know it's working if you see the name of your virtual environment (e.g., (my_env)) at the beginning of your command prompt.
 
+### To set your api key automatically when you open Termux
+
+Open ~/.zshrc and add 
+
+    export MISTRAL_API_KEY="<your><api><key>"
+
+to the top somewhere. If you activate your venv using this method, add it below that.
