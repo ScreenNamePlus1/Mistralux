@@ -55,9 +55,31 @@ This script integrates standard terminal commands with AI-powered features in on
    - Failed commands suggest fixes.
 - **Note**: Uses Mistral’s API (check https://docs.mistral.ai). For local use, see `aishell_local.py`.
 
-#### Optional: Make Executable
+#Optional: Make Executable
 - Add shebang: `#!/usr/bin/env python3` at the top.
-- Run: `chmod +x aishell.py` and `./aishell.py`.
+- Run: `chmod +x ~/Mistralux/aishell.py` and `./aishell.py` to verify it is executable.
+
+To add your script to your $PATH so it can be run from any folder, you should create a symbolic link in a directory that is already in your $PATH. Since you are not root, you can't use system directories like /usr/local/bin. The best practice is to use your personal ~/bin directory.
+
+- Step 1: Create a personal bin directory
+First, check if you have a bin directory in your home folder. If not, create it.
+    mkdir -p ~/bin
+
+- Step 2: Add ~/bin to your $PATH
+To make this directory a part of your system's search path, you need to add it to your shell's configuration file.
+    echo 'export PATH="$HOME/bin:$PATH"' >> ~/.bashrc
+    source ~/.bashrc
+
+This command appends the line to your .bashrc file and then reloads the file so the changes take effect immediately.
+
+- Step 3: Create a symbolic link to your script
+Now, you can create a symbolic link (a shortcut) from your ~/bin directory to your script in ~/Mistralux. This lets you run the script from anywhere without moving the actual file.
+    ln -s ~/Mistralux/aishell.py ~/bin/aishell
+
+This command creates a link named aishell inside your ~/bin folder that points to your aishell.py script. Note that you don't need the .py extension for the link name, which makes it easier to type.
+
+Now you can type aishell from anywhere within your venv or any environment you installed this in. I used a venv in Debian on Termux.
+
 
 ### Local Version (`aishell_local.py`) with No API Calls
 Replaces the Mistral API with Hugging Face `transformers` for local inference.
