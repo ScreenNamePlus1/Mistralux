@@ -27,6 +27,8 @@ Mistralux provides `AIShell`, a Python-based command-line shell that enhances Li
 - **Error Handling**: Suggests fixes for command errors, retries API rate limits, and handles timeouts (5s for commands, 10s for scripts).
 - **Caching**: Caches API responses for faster repeated queries.
 
+![](https://github.com/ScreenNamePlus1/Mistralux/blob/main/Screenshot_20250821-020312.png)
+
 ## Prerequisites
 - Python 3.8+.
 - For API mode (`mistral` or `huggingface`):
