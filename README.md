@@ -1,7 +1,7 @@
 Below is a revised `README.md` tailored to your request. It separates the setup instructions into three distinct sections: `aishell.py` (API-based), `aishell_local.py` (local inference), and Termux-specific setup. The virtual environment setup is exclusive to the Termux section to address its unique constraints (e.g., resource limitations, Android environment). I've ensured no redundancy, improved organization, and included dependency issues for clarity. The Termux section is streamlined to focus on its specific needs without repeating general setup steps unnecessarily. You may need to scroll up to find commands from references that are given later in the README.
 
 ---
-![] https://github.com/ScreenNamePlus1/Mistralux/blob/main/1755716278933.jpg
+![](https://github.com/ScreenNamePlus1/Mistralux/blob/main/1755716278933.jpg)
 ---
 
 # aishell.py
