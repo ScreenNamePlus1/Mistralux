@@ -40,18 +40,17 @@ This script integrates standard terminal commands with AI-powered features in on
    ```
 
 #### Steps
-1. **Save the Script**: Create `aishell.py` in a directory (e.g., `~/projects/Mistralux`):
+1. **Save the Script**:
    ```bash
+   git clone https://github.com/ScreenNamePlus1/Mistralux.git
    mkdir -p ~/projects/Mistralux
-   cd ~/projects/Mistralux
-   nano aishell.py  # Paste code, save
    ```
-2. **Run the Script**:
+3. **Run the Script**:
    ```bash
    python3 aishell.py
    ```
    - Expect: `Welcome to AI Shell... $`
-3. **Usage Examples**:
+4. **Usage Examples**:
    - `ls -l` (regular command)
    - `natural list all files recursively` (AI conversion)
    - `explain grep -r` (explanation)
