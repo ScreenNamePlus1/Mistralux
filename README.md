@@ -1,4 +1,4 @@
-!
+![](https://github.com/ScreenNamePlus1/Mistralux/blob/main/1755716278933.jpg)
 # Mistralux: AI-Enhanced Linux Shell
 
 Mistralux provides `AIShell`, a Python-based command-line shell that enhances Linux workflows with AI-powered features. It supports Mistral AI API, Hugging Face API, or local inference (using Hugging Face `transformers`) for natural language command generation, explanations, script generation, and file summarization.
