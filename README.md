@@ -51,7 +51,7 @@ Supports Mistral AI, Hugging Face APIs, or local inference.
 2. **Install Dependencies**:
    - For API mode:
      ```bash
-     pip install requests cmd termcolor
+     pip install requests termcolor
      ```
    - For local mode (optional):
      ```bash
