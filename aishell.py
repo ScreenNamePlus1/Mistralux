@@ -9,32 +9,45 @@ import requests
 from cmd import Cmd
 import shlex
 from functools import lru_cache
-from termcolor import colored
+try:
+    from termcolor import colored
+    print("Debug: termcolor imported successfully")  # Debug
+except ImportError:
+    print("Debug: termcolor not installed, defining fallback")  # Debug
+    def colored(text, *args, **kwargs):
+        return text
 import readline
 import glob
 import time
-import re  # Added for ANSI code stripping
+import re
+print("Debug: Imports completed")  # Debug
+
 try:
     from transformers import pipeline
     import torch
+    print("Debug: transformers and torch imported successfully")  # Debug
 except ImportError:
     pipeline = None
     torch = None
+    print("Debug: transformers or torch not installed")  # Debug
 
 class AIShell(Cmd):
     intro = colored("Welcome to AI Shell with Mistral/Hugging Face/Local integration. Type help or ? for assistance.\n", "green")
 
     def __init__(self):
+        print("Debug: Entering AIShell.__init__")  # Debug
         super().__init__()
         self.mistral_api_key = os.getenv("MISTRAL_API_KEY")
         self.huggingface_api_key = os.getenv("HUGGINGFACE_API_KEY")
-        self.ai_provider = "mistral"  # Default: mistral, huggingface, or local
+        print(f"Debug: MISTRAL_API_KEY: {'set' if self.mistral_api_key else 'not set'}")  # Debug
+        print(f"Debug: HUGGINGFACE_API_KEY: {'set' if self.huggingface_api_key else 'not set'}")  # Debug
+        self.ai_provider = "mistral"
         self.use_ai = True
         self.mistral_model = os.getenv("MISTRAL_MODEL", "mistral-large-latest")
         self.huggingface_model = os.getenv("HUGGINGFACE_MODEL", "mistralai/Mixtral-8x7B-Instruct-v0.1")
         self.local_model = None
         self.aliases = {}
-        self.plain_prompt = ""  # Store plain-text prompt
+        self.plain_prompt = ""
         if not self.mistral_api_key and not self.huggingface_api_key and not pipeline:
             print(colored("Error: No API keys or transformers library available.", "red"))
             sys.exit(1)
@@ -55,17 +68,18 @@ class AIShell(Cmd):
         readline.set_history_length(1000)
         import atexit
         atexit.register(readline.write_history_file, history_file)
+        print("Debug: Calling update_prompt")  # Debug
         self.update_prompt()
+        print("Debug: AIShell.__init__ completed")  # Debug
 
     def update_prompt(self):
         venv = os.getenv("VIRTUAL_ENV")
         venv_name = os.path.basename(venv) if venv else ""
         cwd = os.path.basename(os.getcwd())
         provider = self.ai_provider.capitalize()
-        # Plain-text prompt for readline and cmd
         self.plain_prompt = f"[{provider}]{venv_name}:{cwd} $ " if venv else f"[{provider}]{cwd} $ "
-        # Colored prompt for display
         self.prompt = colored(self.plain_prompt, "blue")
+        print(f"Debug: Updated prompt to '{self.prompt}'")  # Debug
 
     def strip_ansi_codes(self, text):
         """Remove ANSI escape codes from text."""
@@ -75,13 +89,14 @@ class AIShell(Cmd):
     def preloop(self):
         """Set up the command loop."""
         readline.set_completer_delims(readline.get_completer_delims())
-        # Update prompt to ensure it's set correctly
         self.update_prompt()
+        print("Debug: Entering command loop")  # Debug
 
     def postcmd(self, stop, line):
         """Ensure the prompt is redisplayed correctly after each command."""
-        print()  # Add a newline to prevent overwriting
-        self.update_prompt()  # Update prompt in case directory or provider changes
+        print("Debug: Postcmd called, adding newline")  # Debug
+        print()
+        self.update_prompt()
         return stop
 
     @lru_cache(maxsize=100)
@@ -218,4 +233,63 @@ class AIShell(Cmd):
             print(colored("Usage: natural <query>", "red"))
             return
         model = "codestral-latest" if self.ai_provider == "mistral" else None
-        prompt
+        prompt = f"Convert this natural language request to a single Linux command (output only the command): '{line}'"
+        command = self.query_mistral(prompt, model=model)
+        if command:
+            print(colored(f"Suggested command: {command}", "green"))
+            if input(colored("Execute? (y/n): ", "yellow")).lower() == "y":
+                if self.is_safe_command(command):
+                    try:
+                        subprocess.run(command, shell=True, check=True, text=True, capture_output=True, timeout=10)
+                    except subprocess.CalledProcessError as e:
+                        print(colored(f"Execution Error: The command returned a non-zero exit code.\n{e.stderr}", "red"))
+                    except subprocess.TimeoutExpired:
+                        print(colored("Execution Error: The command timed out.", "red"))
+
+    def do_explain(self, line):
+        """Explain a Linux command: explain <command>"""
+        if not line:
+            print(colored("Usage: explain <command>", "red"))
+            return
+        prompt = f"Explain the Linux command '{line}' in simple terms."
+        explanation = self.query_mistral(prompt)
+        if explanation:
+            print(colored(explanation, "cyan"))
+
+    def do_generate_script(self, line):
+        """Generate a shell script from natural language: generate_script <description>"""
+        if not line:
+            print(colored("Usage: generate_script <script description>", "red"))
+            return
+        model = "codestral-latest" if self.ai_provider == "mistral" else None
+        prompt = f"Generate a Bash shell script for: '{line}'. Output only the script code."
+        script = self.query_mistral(prompt, model=model)
+        if script:
+            print(colored("Generated Script:", "green"))
+            print(script)
+            filename = input(colored("Save to file? Enter filename or press enter to skip: ", "yellow"))
+            if filename:
+                with open(filename, "w") as f:
+                    f.write(script)
+                print(colored(f"Saved to {filename}", "green"))
+            if input(colored("Execute script? (y/n): ", "yellow")).lower() == "y":
+                if self.is_safe_command(script):
+                    try:
+                        subprocess.run(["bash", "-c", script], check=True, text=True, capture_output=True, timeout=10)
+                    except subprocess.CalledProcessError as e:
+                        print(colored(f"Execution Error: The script returned a non-zero exit code.\n{e.stderr}", "red"))
+                    except subprocess.TimeoutExpired:
+                        print(colored("Execution Error: The script timed out.", "red"))
+
+    def do_summarize(self, line):
+        """Summarize a text file: summarize <filename>"""
+        if not line:
+            print(colored("Usage: summarize <filename>", "red"))
+            return
+        try:
+            with open(line, "r") as f:
+                text = f.read()
+            prompt = f"Summarize the following text in a concise paragraph:\n\n{text}"
+            summary = self.query_mistral(prompt)
+            if summary:
+                print(colored("\
