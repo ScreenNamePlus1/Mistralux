@@ -152,4 +152,4 @@ class AIShell(Cmd):
         # ... (unchanged, same as your script)
         pass  # Replace with your original do_help method
 
-    def complete_natural(self, text, line,
+    def complete_natural(self, text, line,)
